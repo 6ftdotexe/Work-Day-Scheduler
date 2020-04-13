@@ -23,12 +23,13 @@ $(document).ready(function () {
         var newSpan = $("<span>");
         var newTextInput = $("<input>");
         var newBtn = $("<button>");
+        
 
 
         var textInput = "data-text"+ index;
         var old = localStorage.getItem(textInput);
         console.log(old);
-        newTextInput.text(old);
+        
         
         //appends new el's to container, parent or sibling respectively. Adds B/S classes to new el's 
         $(".container").append(newDiv);
@@ -40,11 +41,22 @@ $(document).ready(function () {
         newSpan.addClass("input-group-text");
         newSpan.addClass("start-time")
         newSpan.text(startTime);
+
+        
         newDiv.append(newTextInput);
         newTextInput.attr("type", "text");
-        newTextInput.attr("data", "data-input" + index);
-        newTextInput.addClass("form-control")
+        //newTextInput.attr("id", "data-input" + index);
+        newTextInput.addClass("form-control");
         newTextInput.attr("data", "data-text" + index);
+        newTextInput.attr("id", "data-input" + index);
+
+        //This takes the part of the form
+        var replaceText = document.getElementById("data-input" + index);
+        //This takes the text and puts it in the form
+        replaceText.value = old;
+        console.log(replaceText);
+
+
         newDiv.append(newBtn);
         newBtn.addClass("btn btn-outline-secondary");
 
@@ -59,6 +71,7 @@ $(document).ready(function () {
         var textInput = $(this).siblings("input").attr("data");
         console.log(textInput);
         var textVal = $(this).siblings("input").val();
+        console.log(textVal);
         localStorage.setItem(textInput, textVal);
         var lsVal = localStorage.getItem(textInput);
         $(this).siblings("input").text(lsVal);
